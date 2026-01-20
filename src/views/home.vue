@@ -46,7 +46,6 @@ const logout = () => {
   // امسح التوكن أو البيانات
   localStorage.removeItem('token')
   localStorage.removeItem('user')
-
   router.push('/login')
 }
 </script>
