@@ -5,31 +5,34 @@ import sign from '@/views/sign.vue'
 import { auth } from '@/firebase/conghf'
 import { onAuthStateChanged } from 'firebase/auth'
 
+const routes = [
+  {
+    name: 'login',
+    path: '/login',
+    component: login,
+    meta: { requiresAuth: false }
+  },
+  {
+    name: 'sign',
+    path: '/sign',
+    component: sign,
+    meta: { requiresAuth: false }
+  },
+  {
+    name: 'home',
+    path: '/home',
+    component: home,
+    meta: { requiresAuth: true }
+  },
+]
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      name: 'login',
-      path: '/login',
-      component: login,
-      meta: { requiresAuth: false }
-    },
-    {
-      name: 'sign',
-      path: '/sign',
-      component: sign,
-      meta: { requiresAuth: false }
-    },
-    {
-      name: 'home',
-      path: '/home',
-      component: home,
-      meta: { requiresAuth: true }
-    },
-  ],
+  // 👇 حط اسم الريبو بتاعك هنا
+  history: createWebHistory('/vueweb/'),
+  routes,
 })
 
-// ✅ حل مشكلة التأخير في Firebase
+// ✅ حل مشكلة تأخير Firebase
 const getCurrentUser = () => {
   return new Promise((resolve, reject) => {
     const unsubscribe = onAuthStateChanged(auth, user => {
